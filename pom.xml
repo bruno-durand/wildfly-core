@@ -31,7 +31,7 @@
 
     <groupId>org.wildfly.core</groupId>
     <artifactId>wildfly-core-parent</artifactId>
-    <version>6.0.2.Final-bdf001</version>
+    <version>6.0.2.Final-bdf002</version>
 
     <packaging>pom</packaging>
 
@@ -139,7 +139,8 @@
         <version.com.jcraft.jzlib>1.1.1</version.com.jcraft.jzlib>
         <version.commons-io>2.5</version.commons-io>
         <version.commons-lang>2.6</version.commons-lang>
-        <version.io.undertow>2.0.13.Final</version.io.undertow>
+        <!-- upgrade undertow CVE-ID 2020-1710 / ACVID-7835-->
+        <version.io.undertow>2.0.31.Final</version.io.undertow>
         <version.javax.inject.javax.inject>1</version.javax.inject.javax.inject>
         <version.javax.json.javax-json-api>1.1.2</version.javax.json.javax-json-api>
         <version.junit>4.12</version.junit>
