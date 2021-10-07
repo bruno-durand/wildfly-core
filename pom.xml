@@ -137,7 +137,7 @@
         <version.com.io7m.xom>1.2.10</version.com.io7m.xom>
         <version.com.jcraft.jsch>0.1.54</version.com.jcraft.jsch>
         <version.com.jcraft.jzlib>1.1.1</version.com.jcraft.jzlib>
-        <version.commons-io>2.5</version.commons-io>
+        <version.commons-io>2.11.0</version.commons-io>
         <version.commons-lang>2.6</version.commons-lang>
         <!-- upgrade undertow CVE-ID 2020-1710 / ACVID-7835-->
         <version.io.undertow>2.0.41.Final</version.io.undertow>
