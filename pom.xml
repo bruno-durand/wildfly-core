@@ -172,6 +172,8 @@
         <version.commons-cli>1.4</version.commons-cli>
         <version.commons-lang3>3.11</version.commons-lang3>
         <version.io.undertow>2.2.21.Final</version.io.undertow>
+        <version.io.undertow.servlet.jakarta>2.2.20.Final</version.io.undertow.servlet.jakarta>
+        <version.io.undertow.websockets.jsr>2.2.28.Final</version.io.undertow.websockets.jsr>
         <version.jakarta.inject.jakarta.inject-api>1.0.5</version.jakarta.inject.jakarta.inject-api>
         <version.jakarta.json.jakarta-json-api>1.1.6</version.jakarta.json.jakarta-json-api>
         <version.javax.xml.bind.jaxb-api>2.4.0-b180830.0359</version.javax.xml.bind.jaxb-api>
@@ -242,7 +244,7 @@
         <version.org.wildfly.openssl.wildfly-openssl-windows-x86_64>${version.org.wildfly.openssl.natives}</version.org.wildfly.openssl.wildfly-openssl-windows-x86_64>
         <version.org.wildfly.security.elytron>1.19.1.Final</version.org.wildfly.security.elytron>
         <version.org.wildfly.security.elytron-web>1.10.1.Final</version.org.wildfly.security.elytron-web>
-        <version.org.yaml.snakeyaml>1.29</version.org.yaml.snakeyaml>
+        <version.org.yaml.snakeyaml>1.31</version.org.yaml.snakeyaml>
     </properties>
 
     <modules>
@@ -787,7 +789,7 @@
             <dependency>
                 <groupId>io.undertow</groupId>
                 <artifactId>undertow-servlet-jakarta</artifactId>
-                <version>${version.io.undertow}</version>
+                <version>${version.io.undertow.servlet.jakarta}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>*</groupId>
@@ -798,7 +800,7 @@
             <dependency>
                 <groupId>io.undertow</groupId>
                 <artifactId>undertow-websockets-jsr</artifactId>
-                <version>${version.io.undertow}</version>
+                <version>${version.io.undertow.websockets.jsr}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.jboss.threads</groupId>
@@ -817,7 +819,7 @@
             <dependency>
                 <groupId>io.undertow</groupId>
                 <artifactId>undertow-websockets-jsr-jakarta</artifactId>
-                <version>${version.io.undertow}</version>
+                <version>${version.io.undertow.servlet.jakarta}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>*</groupId>
