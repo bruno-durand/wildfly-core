@@ -171,9 +171,9 @@
         <version.com.jcraft.jsch>0.1.55</version.com.jcraft.jsch>
         <version.commons-cli>1.4</version.commons-cli>
         <version.commons-lang3>3.11</version.commons-lang3>
-        <version.io.undertow>2.2.21.Final</version.io.undertow>
+        <version.io.undertow>2.2.36.Final</version.io.undertow>
         <version.io.undertow.servlet.jakarta>2.2.20.Final</version.io.undertow.servlet.jakarta>
-        <version.io.undertow.websockets.jsr>2.2.28.Final</version.io.undertow.websockets.jsr>
+        <version.io.undertow.websockets.jsr>2.2.36.Final</version.io.undertow.websockets.jsr>
         <version.jakarta.inject.jakarta.inject-api>1.0.5</version.jakarta.inject.jakarta.inject-api>
         <version.jakarta.json.jakarta-json-api>1.1.6</version.jakarta.json.jakarta-json-api>
         <version.javax.xml.bind.jaxb-api>2.4.0-b180830.0359</version.javax.xml.bind.jaxb-api>
