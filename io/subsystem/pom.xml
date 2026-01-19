@@ -10,7 +10,7 @@
     <parent>
         <artifactId>wildfly-io-bom</artifactId>
         <groupId>org.wildfly.core</groupId>
-        <version>23.0.3.Final-bdf007</version>
+        <version>23.0.3.Final-bdf008</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
