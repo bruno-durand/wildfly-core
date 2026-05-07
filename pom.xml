@@ -405,7 +405,10 @@
                                 <rules>
                                     <bannedDependencies>
                                         <searchTransitive>true</searchTransitive>
-                                        <excludes>
+                                        <includes>
+                     			    <include>*mock*</include>
+  			                </includes>
+					<excludes>
                                             <exclude>args4j:args4j</exclude>
                                             <exclude>biz.aQute:bnd</exclude>
                                             <exclude>com.google.gwt.inject:gin</exclude>
