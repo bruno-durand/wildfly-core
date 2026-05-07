@@ -33,7 +33,7 @@
 
     <groupId>org.wildfly.core</groupId>
     <artifactId>wildfly-core-parent</artifactId>
-    <version>18.1.2.Final-bdf009</version>
+    <version>18.1.2.Final-bdf008</version>
 
     <packaging>pom</packaging>
 
@@ -170,7 +170,7 @@
         <version.com.google.guava.failureaccess>1.0.1</version.com.google.guava.failureaccess>
         <version.com.jcraft.jsch>0.1.55</version.com.jcraft.jsch>
         <version.commons-cli>1.4</version.commons-cli>
-        <version.commons-lang3>3.18</version.commons-lang3>
+        <version.commons-lang3>3.18.0</version.commons-lang3>
         <version.io.undertow>2.2.39.Final</version.io.undertow>
         <version.io.undertow.servlet.jakarta>2.2.20.Final</version.io.undertow.servlet.jakarta>
         <version.io.undertow.websockets.jsr>2.2.36.Final</version.io.undertow.websockets.jsr>
@@ -193,7 +193,7 @@
         <version.org.apache.maven.provider>3.5.4</version.org.apache.maven.provider>
         <version.org.apache.maven.resolver>1.1.1</version.org.apache.maven.resolver>
         <version.org.apache.sshd>2.12.1</version.org.apache.sshd>
-        <version.org.bouncycastle>1.69</version.org.bouncycastle>
+        <version.org.bouncycastle>1.84</version.org.bouncycastle>
         <version.org.codehaus.plexus.plexus-utils>3.1.1</version.org.codehaus.plexus.plexus-utils>
         <version.org.eclipse.jgit>5.13.0.202109080827-r</version.org.eclipse.jgit>
         <version.org.fusesource.jansi>1.18</version.org.fusesource.jansi>
@@ -1295,12 +1295,12 @@
             <dependency>
                 <groupId>org.bouncycastle</groupId>
                 <artifactId>bcpg-jdk15on</artifactId>
-                <version>${version.org.bouncycastle}</version>
+                <version>1.70</version>
             </dependency>
             <dependency>
                 <groupId>org.bouncycastle</groupId>
                 <artifactId>bcpkix-jdk15on</artifactId>
-                <version>${version.org.bouncycastle}</version>
+                <version>1.70</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.bouncycastle</groupId>
@@ -1311,12 +1311,12 @@
             <dependency>
                 <groupId>org.bouncycastle</groupId>
                 <artifactId>bcprov-jdk15on</artifactId>
-                <version>${version.org.bouncycastle}</version>
+                <version>1.70</version>
             </dependency>
             <dependency>
                 <groupId>org.bouncycastle</groupId>
                 <artifactId>bcutil-jdk15on</artifactId>
-                <version>${version.org.bouncycastle}</version>
+                <version>1.70</version>
             </dependency>
 
             <dependency>
