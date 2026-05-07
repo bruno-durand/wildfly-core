@@ -191,19 +191,19 @@
                     </exclusion>
                     <exclusion>
                         <groupId>org.bouncycastle</groupId>
-                        <artifactId>bcmail-jdk18on</artifactId>
+                        <artifactId>bcmail-jdk15on</artifactId>
                     </exclusion>
                     <exclusion>
                         <groupId>org.bouncycastle</groupId>
-                        <artifactId>bcprov-jdk18on</artifactId>
+                        <artifactId>bcprov-jdk15on</artifactId>
                     </exclusion>
                     <exclusion>
                         <groupId>org.bouncycastle</groupId>
-                        <artifactId>bcpkix-jdk18on</artifactId>
+                        <artifactId>bcpkix-jdk15on</artifactId>
                     </exclusion>
                     <exclusion>
                         <groupId>org.bouncycastle</groupId>
-                        <artifactId>bcutil-jdk18on</artifactId>
+                        <artifactId>bcutil-jdk15on</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
