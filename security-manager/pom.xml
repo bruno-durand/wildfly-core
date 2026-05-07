@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.wildfly.core</groupId>
         <artifactId>wildfly-core-parent</artifactId>
-        <version>23.0.3.Final-bdf009</version>
+        <version>23.0.3.Final-bdf010</version>
     </parent>
 
     <artifactId>wildfly-security-manager</artifactId>
