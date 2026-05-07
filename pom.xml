@@ -1198,19 +1198,19 @@
                     </exclusion>
                     <exclusion>
                         <groupId>org.bouncycastle</groupId>
-                        <artifactId>bcpg-jdk15on</artifactId>
+                        <artifactId>bcpg-jdk18on</artifactId>
                     </exclusion>
                     <exclusion>
                         <groupId>org.bouncycastle</groupId>
-                        <artifactId>bcpkix-jdk15on</artifactId>
+                        <artifactId>bcpkix-jdk18on</artifactId>
                     </exclusion>
                     <exclusion>
                         <groupId>org.bouncycastle</groupId>
-                        <artifactId>bcprov-jdk15on</artifactId>
+                        <artifactId>bcprov-jdk18on</artifactId>
                     </exclusion>
                     <exclusion>
                         <groupId>org.bouncycastle</groupId>
-                        <artifactId>bcutil-jdk15on</artifactId>
+                        <artifactId>bcutil-jdk18on</artifactId>
                     </exclusion>
                     <exclusion>
                         <groupId>net.i2p.crypto</groupId>
@@ -1278,45 +1278,45 @@
             </dependency>
             <dependency>
                 <groupId>org.bouncycastle</groupId>
-                <artifactId>bcmail-jdk15on</artifactId>
+                <artifactId>bcmail-jdk18on</artifactId>
                 <version>${version.org.bouncycastle}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.bouncycastle</groupId>
-                        <artifactId>bcutil-jdk15on</artifactId>
+                        <artifactId>bcutil-jdk18on</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.bouncycastle</groupId>
-                <artifactId>bcjmail-jdk15on</artifactId>
+                <artifactId>bcjmail-jdk18on</artifactId>
                 <version>${version.org.bouncycastle}</version>
             </dependency>
             <dependency>
                 <groupId>org.bouncycastle</groupId>
-                <artifactId>bcpg-jdk15on</artifactId>
-                <version>1.70</version>
+                <artifactId>bcpg-jdk18on</artifactId>
+                <version>${version.org.bouncycastle}</version>
             </dependency>
             <dependency>
                 <groupId>org.bouncycastle</groupId>
-                <artifactId>bcpkix-jdk15on</artifactId>
-                <version>1.70</version>
+                <artifactId>bcpkix-jdk18on</artifactId>
+                <version>${version.org.bouncycastle}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.bouncycastle</groupId>
-                        <artifactId>bcutil-jdk15on</artifactId>
+                        <artifactId>bcutil-jdk18on</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.bouncycastle</groupId>
-                <artifactId>bcprov-jdk15on</artifactId>
-                <version>1.70</version>
+                <artifactId>bcprov-jdk18on</artifactId>
+                <version>${version.org.bouncycastle}</version>
             </dependency>
             <dependency>
                 <groupId>org.bouncycastle</groupId>
-                <artifactId>bcutil-jdk15on</artifactId>
-                <version>1.70</version>
+                <artifactId>bcutil-jdk18on</artifactId>
+                <version>${version.org.bouncycastle}</version>
             </dependency>
 
             <dependency>
