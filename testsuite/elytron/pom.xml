@@ -13,7 +13,7 @@
     <parent>
         <groupId>org.wildfly.core</groupId>
         <artifactId>wildfly-core-testsuite</artifactId>
-        <version>23.0.3.Final-bdf010</version>
+        <version>23.0.3.Final-bdf011</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
