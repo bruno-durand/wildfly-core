@@ -33,7 +33,7 @@
 
     <groupId>org.wildfly.core</groupId>
     <artifactId>wildfly-core-parent</artifactId>
-    <version>18.1.2.Final-bdf010</version>
+    <version>18.1.2.Final-bdf009</version>
 
     <packaging>pom</packaging>
 
@@ -170,8 +170,8 @@
         <version.com.google.guava.failureaccess>1.0.1</version.com.google.guava.failureaccess>
         <version.com.jcraft.jsch>0.1.55</version.com.jcraft.jsch>
         <version.commons-cli>1.4</version.commons-cli>
-        <version.commons-lang3>3.18</version.commons-lang3>
-        <version.io.undertow>2.2.40.Final</version.io.undertow>
+        <version.commons-lang3>3.18.0</version.commons-lang3>
+        <version.io.undertow>2.2.39.Final</version.io.undertow>
         <version.io.undertow.servlet.jakarta>2.2.20.Final</version.io.undertow.servlet.jakarta>
         <version.io.undertow.websockets.jsr>2.2.36.Final</version.io.undertow.websockets.jsr>
         <version.jakarta.inject.jakarta.inject-api>1.0.5</version.jakarta.inject.jakarta.inject-api>
@@ -189,7 +189,7 @@
         -->
         <version.org.apache.httpcomponents.httpclient>4.5.13</version.org.apache.httpcomponents.httpclient>
         <version.org.apache.httpcomponents.httpcore>4.4.15</version.org.apache.httpcomponents.httpcore>
-        <version.org.apache.logging.log4j>2.17.2</version.org.apache.logging.log4j>
+        <version.org.apache.logging.log4j>2.25.4</version.org.apache.logging.log4j>
         <version.org.apache.maven.provider>3.5.4</version.org.apache.maven.provider>
         <version.org.apache.maven.resolver>1.1.1</version.org.apache.maven.resolver>
         <version.org.apache.sshd>2.12.1</version.org.apache.sshd>
