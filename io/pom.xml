@@ -29,7 +29,11 @@
     <parent>
         <artifactId>wildfly-core-parent</artifactId>
         <groupId>org.wildfly.core</groupId>
+<<<<<<< HEAD
+        <version>18.1.2.Final-bdf009</version>
+=======
         <version>18.1.2.Final-bdf008</version>
+>>>>>>> parent of a8936382e1 (update version and CVE-2025-12543)
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>

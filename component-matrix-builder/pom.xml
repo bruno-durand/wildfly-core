@@ -26,7 +26,11 @@
         Maintain separation between the artifact id and the version to help prevent
         merge conflicts between commits changing the GA and those changing the V.
         -->
+<<<<<<< HEAD
+        <version>18.1.2.Final-bdf009</version>
+=======
         <version>18.1.2.Final-bdf008</version>
+>>>>>>> parent of a8936382e1 (update version and CVE-2025-12543)
     </parent>
 
     <groupId>org.wildfly.core</groupId>

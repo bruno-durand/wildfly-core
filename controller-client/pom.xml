@@ -29,7 +29,11 @@
     <parent>
         <groupId>org.wildfly.core</groupId>
         <artifactId>wildfly-core-parent</artifactId>
+<<<<<<< HEAD
+        <version>18.1.2.Final-bdf009</version>
+=======
         <version>18.1.2.Final-bdf008</version>
+>>>>>>> parent of a8936382e1 (update version and CVE-2025-12543)
     </parent>
 
     <artifactId>wildfly-controller-client</artifactId>
