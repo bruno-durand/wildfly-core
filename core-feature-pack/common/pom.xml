@@ -27,11 +27,7 @@
     <parent>
         <groupId>org.wildfly.core</groupId>
         <artifactId>wildfly-core-feature-pack-parent</artifactId>
-<<<<<<< HEAD
         <version>18.1.2.Final-bdf009</version>
-=======
-        <version>18.1.2.Final-bdf008</version>
->>>>>>> parent of a8936382e1 (update version and CVE-2025-12543)
     </parent>
 
     <artifactId>wildfly-core-feature-pack-common</artifactId>
@@ -233,22 +229,22 @@
 
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpg-jdk18on</artifactId>
+            <artifactId>bcpg-jdk15on</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpkix-jdk18on</artifactId>
+            <artifactId>bcpkix-jdk15on</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk18on</artifactId>
+            <artifactId>bcprov-jdk15on</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcutil-jdk18on</artifactId>
+            <artifactId>bcutil-jdk15on</artifactId>
          </dependency>
 
         <dependency>
