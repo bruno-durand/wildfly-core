@@ -16,7 +16,7 @@
 
     <groupId>org.wildfly.core</groupId>
     <artifactId>wildfly-core-parent</artifactId>
-    <version>32.0.3.Final-bdf001</version>
+    <version>32.0.3.Final-bdf002</version>
 
     <packaging>pom</packaging>
 
@@ -235,7 +235,7 @@
         <version.commons-daemon>1.5.1</version.commons-daemon>
         <version.commons-lang3>3.20.0</version.commons-lang3>
         <version.commons-io>2.21.0</version.commons-io>
-        <version.io.netty>4.1.133.Final</version.io.netty>
+        <version.io.netty>4.1.136.Final</version.io.netty>
         <version.io.smallrye.jandex>3.5.3</version.io.smallrye.jandex>
         <version.io.smallrye.smallrye-common>2.17.1</version.io.smallrye.smallrye-common>
         <version.io.undertow>2.4.3.Final</version.io.undertow>
@@ -306,7 +306,7 @@
         <version.org.wildfly.legacy.test>10.0.2.Final</version.org.wildfly.legacy.test>
         <version.org.wildfly.openssl>2.3.0.Final</version.org.wildfly.openssl>
         <version.org.wildfly.openssl.natives>2.3.0.Final</version.org.wildfly.openssl.natives>
-        <version.org.wildfly.security.elytron>2.9.0.Final</version.org.wildfly.security.elytron>
+        <version.org.wildfly.security.elytron>2.9.4.Final</version.org.wildfly.security.elytron>
         <version.org.wildfly.security.elytron-web>4.2.0.Final</version.org.wildfly.security.elytron-web>
         <version.org.wildfly.security.jakarta.elytron-ee>3.2.0.Final</version.org.wildfly.security.jakarta.elytron-ee>
         <version.org.wildfly.unstable.api.annotation>1.0.2.Final</version.org.wildfly.unstable.api.annotation>
