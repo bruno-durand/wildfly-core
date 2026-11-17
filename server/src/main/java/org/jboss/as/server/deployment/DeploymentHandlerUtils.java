@@ -21,9 +21,10 @@ import java.util.zip.ZipOutputStream;
 
 import org.jboss.as.controller.OperationContext;
 import org.jboss.as.controller.OperationFailedException;
+import org.jboss.as.controller.operations.validation.DeploymentSourceValidator;
 import org.jboss.as.repository.ContentRepository;
-import org.jboss.as.server.logging.ServerLogger;
 import org.jboss.as.server.controller.resources.DeploymentAttributes;
+import org.jboss.as.server.logging.ServerLogger;
 import org.jboss.dmr.ModelNode;
 
 /**
@@ -57,7 +58,8 @@ public abstract class DeploymentHandlerUtils {
         return contents;
     }
 
-    public static InputStream getInputStream(OperationContext context, ModelNode contentItem) throws OperationFailedException {
+    public static InputStream getInputStream(OperationContext context, ModelNode contentItem,
+            DeploymentSourceValidator deploymentSourceValidator) throws OperationFailedException {
         InputStream in = null;
         if(!contentItem.isDefined()) {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -85,10 +87,9 @@ public abstract class DeploymentHandlerUtils {
             }
         } else if (contentItem.hasDefined(DeploymentAttributes.CONTENT_URL.getName())) {
             final String urlSpec = DeploymentAttributes.CONTENT_URL.resolveModelAttribute(context, contentItem).asString();
+            deploymentSourceValidator.validateUrl(urlSpec);
             try {
                 in = new URL(urlSpec).openStream();
-            } catch (MalformedURLException e) {
-                throw ServerLogger.ROOT_LOGGER.invalidStreamURL(e, urlSpec);
             } catch (IOException e) {
                 throw ServerLogger.ROOT_LOGGER.invalidStreamURL(e, urlSpec);
             }

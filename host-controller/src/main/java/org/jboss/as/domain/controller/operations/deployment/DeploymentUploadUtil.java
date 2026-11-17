@@ -17,6 +17,9 @@ import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.URL
 import static org.jboss.as.server.controller.resources.DeploymentAttributes.CONTENT_ARCHIVE;
 import static org.jboss.as.server.controller.resources.DeploymentAttributes.CONTENT_HASH;
 import static org.jboss.as.server.controller.resources.DeploymentAttributes.CONTENT_PARAM_ALL_EXPLODED;
+import static org.jboss.as.server.controller.resources.DeploymentAttributes.DEPLOYMENT_CONTENT_PATH;
+import static org.jboss.as.server.controller.resources.DeploymentAttributes.EMPTY;
+import static org.jboss.as.server.controller.resources.DeploymentAttributes.OVERWRITE;
 import static org.jboss.as.server.controller.resources.DeploymentAttributes.REMOVED_PATHS;
 import static org.jboss.as.server.controller.resources.DeploymentAttributes.TARGET_PATH;
 import static org.jboss.as.server.controller.resources.DeploymentAttributes.UPDATED_PATHS;
@@ -35,7 +38,9 @@ import org.jboss.as.controller.OperationContext;
 import org.jboss.as.controller.OperationFailedException;
 import org.jboss.as.controller.PathAddress;
 import org.jboss.as.controller.operations.CompositeOperationAwareTransmuter;
+import org.jboss.as.controller.operations.DomainOperationTransmuter;
 import org.jboss.as.controller.operations.OperationAttachments;
+import org.jboss.as.controller.operations.validation.DeploymentSourceValidator;
 import org.jboss.as.controller.registry.Resource;
 import org.jboss.as.domain.controller.logging.DomainControllerLogger;
 import org.jboss.as.repository.ContentRepository;
@@ -45,11 +50,6 @@ import org.jboss.as.repository.HostFileRepository;
 import org.jboss.as.server.controller.resources.DeploymentAttributes;
 import org.jboss.as.server.deployment.ModelContentReference;
 import org.jboss.dmr.ModelNode;
-
-import static org.jboss.as.server.controller.resources.DeploymentAttributes.DEPLOYMENT_CONTENT_PATH;
-import static org.jboss.as.server.controller.resources.DeploymentAttributes.EMPTY;
-import static org.jboss.as.server.controller.resources.DeploymentAttributes.OVERWRITE;
-import org.jboss.as.controller.operations.DomainOperationTransmuter;
 
 /**
  * Utility method for storing deployment content.
@@ -64,14 +64,16 @@ class DeploymentUploadUtil {
     /**
      * Store the deployment contents and attach a "transformed" slave operation to the operation context.
      *
-     * @param context the operation context
-     * @param operation the original operation
-     * @param contentRepository the content repository
+     * @param context                   the operation context
+     * @param operation                 the original operation
+     * @param contentRepository         the content repository
+     * @param deploymentSourceValidator the deployment source validator
      * @return the hash of the uploaded deployment content
      * @throws IOException
      * @throws OperationFailedException
      */
-    public static byte[] storeContentAndTransformOperation(OperationContext context, ModelNode operation, ContentRepository contentRepository) throws IOException, OperationFailedException {
+    public static byte[] storeContentAndTransformOperation(OperationContext context, ModelNode operation, ContentRepository contentRepository,
+            DeploymentSourceValidator deploymentSourceValidator) throws IOException, OperationFailedException {
         if (!operation.hasDefined(CONTENT)) {
             throw createFailureException(DomainControllerLogger.ROOT_LOGGER.invalidContentDeclaration());
         }
@@ -80,7 +82,7 @@ class DeploymentUploadUtil {
             // This should be handled as part of the OSH
             throw createFailureException(DomainControllerLogger.ROOT_LOGGER.invalidContentDeclaration());
         }
-        final byte[] hash = storeDeploymentContent(context, operation, contentRepository);
+        final byte[] hash = storeDeploymentContent(context, operation, contentRepository, deploymentSourceValidator);
 
         // Clear the contents and update with the hash
         final ModelNode slave = operation.clone();
@@ -156,11 +158,13 @@ class DeploymentUploadUtil {
      * @param context the operation context
      * @param operation the original operation
      * @param contentRepository the content repository
+     * @param deploymentSourceValidator the deployment source validator
      * @return the hash of the uploaded deployment content
      * @throws IOException
      * @throws OperationFailedException
      */
-    public static byte[] addContentToExplodedAndTransformOperation(OperationContext context, ModelNode operation, ContentRepository contentRepository) throws OperationFailedException, ExplodedContentException {
+    public static byte[] addContentToExplodedAndTransformOperation(OperationContext context, ModelNode operation, ContentRepository contentRepository,
+            DeploymentSourceValidator deploymentSourceValidator) throws OperationFailedException, ExplodedContentException {
         final Resource deploymentResource = context.readResource(PathAddress.EMPTY_ADDRESS);
         ModelNode contentItem = getContentItem(deploymentResource);
         byte[] oldHash = CONTENT_HASH.resolveModelAttribute(context, contentItem).asBytes();
@@ -172,7 +176,7 @@ class DeploymentUploadUtil {
         for(ModelNode content : contents) {
             InputStream in;
             if(hasValidContentAdditionParameterDefined(content)) {
-                in = getInputStream(context, content);
+                in = getInputStream(context, content, deploymentSourceValidator);
             } else {
                 in = null;
             }
@@ -248,9 +252,10 @@ class DeploymentUploadUtil {
         return fileRepository != null && (backup  || (contentRepository != null && contentRepository.hasContent(oldHash)));
     }
 
-    private static byte[] storeDeploymentContent(OperationContext context, ModelNode operation, ContentRepository contentRepository) throws IOException, OperationFailedException {
-        try (InputStream in = getContents(context, operation)){
-            return contentRepository.addContent(in);
+    private static byte[] storeDeploymentContent(OperationContext context, ModelNode operation, ContentRepository contentRepository,
+            DeploymentSourceValidator deploymentSourceValidator) throws IOException, OperationFailedException {
+        try (InputStream in = getContents(context, operation, deploymentSourceValidator)){
+             return contentRepository.addContent(in);
         }
     }
 
@@ -262,15 +267,17 @@ class DeploymentUploadUtil {
         }
     }
 
-    private static InputStream getContents(OperationContext context, ModelNode operation) throws OperationFailedException {
+    private static InputStream getContents(OperationContext context, ModelNode operation,
+            DeploymentSourceValidator deploymentSourceValidator) throws OperationFailedException {
         if(! operation.hasDefined(CONTENT)) {
             throw createFailureException(DomainControllerLogger.ROOT_LOGGER.invalidContentDeclaration());
         }
-        return getInputStream(context, operation.require(CONTENT).get(0));
+        return getInputStream(context, operation.require(CONTENT).get(0), deploymentSourceValidator);
     }
 
-    private static InputStream getInputStream(OperationContext context, ModelNode content) throws OperationFailedException {
-        InputStream in = null;
+    private static InputStream getInputStream(OperationContext context, ModelNode content,
+            DeploymentSourceValidator deploymentSourceValidator) throws OperationFailedException {
+         InputStream in = null;
         String message = "";
         if (content.hasDefined(INPUT_STREAM_INDEX)) {
             int streamIndex = content.get(INPUT_STREAM_INDEX).asInt();
@@ -285,11 +292,10 @@ class DeploymentUploadUtil {
             message = DomainControllerLogger.ROOT_LOGGER.invalidByteStream();
         } else if (content.hasDefined(URL)) {
             final String urlSpec = content.get(URL).asString();
+            deploymentSourceValidator.validateUrl(urlSpec);
             try {
                 message = DomainControllerLogger.ROOT_LOGGER.invalidUrlStream();
                 in = new URL(urlSpec).openStream();
-            } catch (MalformedURLException e) {
-                throw createFailureException(message);
             } catch (IOException e) {
                 throw createFailureException(message);
             }

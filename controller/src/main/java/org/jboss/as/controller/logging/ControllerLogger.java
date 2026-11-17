@@ -46,6 +46,7 @@ import org.jboss.as.controller.interfaces.InterfaceCriteria;
 import org.jboss.as.controller.notification.Notification;
 import org.jboss.as.controller.parsing.Element;
 import org.jboss.as.controller.persistence.ConfigurationPersistenceException;
+import org.jboss.as.controller.persistence.yaml.YamlConfigurationExtension;
 import org.jboss.as.controller.registry.OperationEntry;
 import org.jboss.as.controller.registry.Resource;
 import org.jboss.dmr.ModelNode;
@@ -3752,4 +3753,28 @@ public interface ControllerLogger extends BasicLogger {
 
     @Message(id = 504, value = "The operation %s is not defined for resource %s.")
     UnsupportedOperationException missingOperationForResource(String op, String address);
+
+    @Message(id = 537, value = "URL scheme '%s' is not permitted for deployment content sources. Allowed schemes: %s. " +
+            "To override, set system property jboss.deployment.source.allow to a regex matching permitted URLs.")
+    OperationFailedException deploymentSourceSchemeNotAllowed(String scheme, String allowedSchemes);
+
+    @Message(id = 538, value = "Path '%s' is within a protected server directory and cannot be used as a deployment " +
+            "content source. To override, set system property jboss.deployment.source.allow to a regex matching permitted URLs.")
+    OperationFailedException deploymentSourcePathBlocked(String path);
+
+    @Message(id = 539, value = "URL '%s' targets a link-local or an address which is not permitted for " +
+            "deployment content sources. To allow link-local addresses, set system property " +
+            "jboss.deployment.source.allow.link-local.address to true.")
+    OperationFailedException deploymentSourceSsrfRejected(String url);
+
+    @Message(id = 540, value = "URL '%s' does not match the configured deployment source allow pattern. " +
+            "Check the value of system property jboss.deployment.source.allow.")
+    OperationFailedException deploymentSourceUrlNotMatchingAllowPattern(String url);
+
+    @LogMessage(level = WARN)
+    @Message(id = 541, value = "Invalid regex in system property jboss.deployment.source.allow: %s")
+    void invalidDeploymentSourceRegExpr(String message);
+
+    @Message(id = 542, value = "Path '%s' cannot be resolved.")
+    OperationFailedException cannotResolvePath(String path, @Cause Throwable cause);
 }

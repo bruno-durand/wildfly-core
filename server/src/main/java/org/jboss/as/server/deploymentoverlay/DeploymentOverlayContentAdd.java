@@ -28,7 +28,9 @@ import org.jboss.as.controller.OperationFailedException;
 import org.jboss.as.controller.PathAddress;
 import org.jboss.as.controller.RunningMode;
 import org.jboss.as.controller.operations.CompositeOperationAwareTransmuter;
+import org.jboss.as.controller.operations.DomainOperationTransmuter;
 import org.jboss.as.controller.operations.OperationAttachments;
+import org.jboss.as.controller.operations.validation.DeploymentSourceValidator;
 import org.jboss.as.controller.registry.Resource;
 import org.jboss.as.protocol.StreamUtils;
 import org.jboss.as.repository.ContentReference;
@@ -37,7 +39,6 @@ import org.jboss.as.repository.DeploymentFileRepository;
 import org.jboss.as.server.deployment.ModelContentReference;
 import org.jboss.as.server.logging.ServerLogger;
 import org.jboss.dmr.ModelNode;
-import org.jboss.as.controller.operations.DomainOperationTransmuter;
 
 /**
  * @author Stuart Douglas
@@ -46,11 +47,13 @@ public class DeploymentOverlayContentAdd extends AbstractAddStepHandler {
 
     protected final ContentRepository contentRepository;
     private final DeploymentFileRepository remoteRepository;
+    private final DeploymentSourceValidator deploymentSourceValidator;
 
 
-    public DeploymentOverlayContentAdd(final ContentRepository contentRepository, final DeploymentFileRepository remoteRepository) {
-        this.contentRepository = contentRepository;
+    public DeploymentOverlayContentAdd(final ContentRepository contentRepository, final DeploymentFileRepository remoteRepository, final DeploymentSourceValidator deploymentSourceValidator) {
+       this.contentRepository = contentRepository;
         this.remoteRepository = remoteRepository;
+        this.deploymentSourceValidator = deploymentSourceValidator;
     }
 
     @Override
@@ -142,8 +145,7 @@ public class DeploymentOverlayContentAdd extends AbstractAddStepHandler {
         return new OperationFailedException(msg);
     }
 
-    protected static InputStream getInputStream(OperationContext context, ModelNode operation) throws OperationFailedException {
-        InputStream in = null;
+protected InputStream getInputStream(OperationContext context, ModelNode operation) throws OperationFailedException {        InputStream in = null;
         if (operation.hasDefined(INPUT_STREAM_INDEX)) {
             int streamIndex = operation.get(INPUT_STREAM_INDEX).asInt();
             int maxIndex = context.getAttachmentStreamCount();
@@ -159,10 +161,9 @@ public class DeploymentOverlayContentAdd extends AbstractAddStepHandler {
             }
         } else if (operation.hasDefined(URL)) {
             final String urlSpec = operation.get(URL).asString();
+            deploymentSourceValidator.validateUrl(urlSpec);
             try {
                 in = new java.net.URL(urlSpec).openStream();
-            } catch (MalformedURLException e) {
-                throw ServerLogger.ROOT_LOGGER.invalidStreamURL(e, urlSpec);
             } catch (IOException e) {
                 throw ServerLogger.ROOT_LOGGER.invalidStreamURL(e, urlSpec);
             }
